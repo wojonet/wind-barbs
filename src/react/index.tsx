@@ -1,17 +1,32 @@
 import React from 'react'
 
+interface WindBarbSvgOptions {
+  color?: string
+}
+
+const defaultOptions = {
+  color: '#000000',
+}
+
 /**
  * Generate a wind barb SVG element
  * @param {number} windSpeed - The wind speed in knots
  * @param {number} windDirection - The wind direction in degrees
+ * @param {WindBarbSvgOptions} options - Options for customizing the SVG
  * @returns {React.JSX.Element} The SVG element representing the wind barb
  */
-const generateWindBarbSvg = (windSpeed: number, windDirection: number): React.JSX.Element => {
+const generateWindBarbSvg = (
+  windSpeed: number,
+  windDirection: number,
+  options: WindBarbSvgOptions = defaultOptions,
+): React.JSX.Element => {
+  const finalOptions = { ...defaultOptions, ...options }
+
   if (windSpeed === 0) {
     // Light and calm winds: render a circle
     return (
       <svg viewBox="0 0 18 25" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="9" cy="12.5" r="5" stroke="black" strokeWidth="2" fill="none" />
+        <circle cx="9" cy="12.5" r="5" stroke={finalOptions.color} strokeWidth="2" fill="none" />
       </svg>
     )
   }
@@ -29,8 +44,8 @@ const generateWindBarbSvg = (windSpeed: number, windDirection: number): React.JS
     flags.push(
       <path
         key={`flag-50-${currentY}`}
-        fill="#000000"
-        stroke="#000000"
+        fill={finalOptions.color}
+        stroke={finalOptions.color}
         strokeWidth="2"
         d={`M9,${currentY} L15,${currentY + 2} L9,${currentY + 4} Z`}
       />,
@@ -48,7 +63,7 @@ const generateWindBarbSvg = (windSpeed: number, windDirection: number): React.JS
         y1={currentY.toString()}
         x2="17.7"
         y2={(currentY - 2.9).toString()}
-        stroke="black"
+        stroke={finalOptions.color}
         strokeWidth="2"
       />,
     )
@@ -65,7 +80,7 @@ const generateWindBarbSvg = (windSpeed: number, windDirection: number): React.JS
         y1={currentY.toString()}
         x2="13.35"
         y2={(currentY - 1.45).toString()}
-        stroke="black"
+        stroke={finalOptions.color}
         strokeWidth="2"
       />,
     )
@@ -82,7 +97,7 @@ const generateWindBarbSvg = (windSpeed: number, windDirection: number): React.JS
         transformOrigin: 'bottom center',
       }}
     >
-      <polyline points="9,25 9,2.9" fill="none" stroke="black" strokeWidth="2" />
+      <polyline points="9,25 9,2.9" fill="none" stroke={finalOptions.color} strokeWidth="2" />
       {flags}
     </svg>
   )

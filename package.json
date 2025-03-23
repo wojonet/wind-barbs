@@ -9,8 +9,16 @@
   "description": "A small utility to generate wind barb SVGs",
   "main": "./dist/index.js",
   "exports": {
-    ".": "./dist/index.js",
-    "./react": "./dist/react/index.js"
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.esm.js",
+      "default": "./dist/index.umd.js"
+    },
+    "./react": {
+      "require": "./dist/react/index.cjs",
+      "import": "./dist/react/index.esm.js",
+      "default": "./dist/react/index.umd.js"
+    }
   },
   "keywords": [
     "wind",
@@ -23,9 +31,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "npm run build:umd && npm run build:react",
-    "build:umd": "webpack --config webpack.config.js",
-    "build:react": "webpack --config webpack.react.config.js",
+    "build": "webpack",
     "clean": "rimraf ./dist"
   },
   "author": "Alec Wojciechowski",

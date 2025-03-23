@@ -10,6 +10,7 @@ const defaultOptions = {
  * Generate a wind barb SVG element
  * @param {number} windSpeed - The wind speed in knots
  * @param {number?} windDirection - The wind direction in degrees
+ * @param {WindBarbSvgOptions?} options - Options for customizing the SVG
  * @returns {SVGSVGElement} The SVG element representing the wind barb
  */
 const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = defaultOptions): SVGSVGElement => {
