@@ -8,8 +8,12 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "jsx": "react" // Add JSX support for React
   },
-  "include": ["src/index.ts"],
+  "include": [
+    "src/index.ts",
+    "src/react/**/*.tsx" // Include React files
+  ],
   "exclude": ["node_modules", "dist"]
 }

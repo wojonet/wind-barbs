@@ -1,25 +1,172 @@
 import path from 'path'
 const __dirname = import.meta.dirname
 
-export default {
-  entry: './src/index.ts', // Your main TypeScript file
-  output: {
-    filename: 'index.js', // The output file
-    path: path.resolve(__dirname, 'dist'), // Output directory
-    library: 'WindBarb', // Expose your library as a global variable
-    libraryTarget: 'umd', // Universal Module Definition for browser compatibility
+export default [
+  // React configurations
+  {
+    entry: './src/react/index.tsx',
+    output: {
+      path: path.resolve(__dirname, 'dist/react'),
+      filename: 'index.umd.js',
+      library: 'WindBarbReact',
+      libraryTarget: 'umd',
+    },
+    resolve: {
+      extensions: ['.tsx', '.jsx'],
+    },
+    externals: {
+      react: 'react',
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'ts-loader',
+              options: {
+                configFile: 'tsconfig.react.json',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    mode: 'production',
   },
-  resolve: {
-    extensions: ['.ts', '.js'], // Resolve TypeScript and JavaScript files
+  {
+    entry: './src/react/index.tsx',
+    output: {
+      path: path.resolve(__dirname, 'dist/react'),
+      filename: 'index.esm.js',
+      libraryTarget: 'module',
+    },
+    experiments: {
+      outputModule: true,
+    },
+    resolve: {
+      extensions: ['.tsx', '.jsx'],
+    },
+    externals: {
+      react: 'react',
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'ts-loader',
+              options: {
+                configFile: 'tsconfig.react.json',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    mode: 'production',
   },
-  module: {
-    rules: [
-      {
-        test: /\.ts$/, // Match TypeScript files
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-    ],
+  {
+    entry: './src/react/index.tsx',
+    output: {
+      path: path.resolve(__dirname, 'dist/react'),
+      filename: 'index.cjs.js',
+      libraryTarget: 'commonjs2',
+    },
+    resolve: {
+      extensions: ['.tsx', '.jsx'],
+    },
+    externals: {
+      react: 'react',
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'ts-loader',
+              options: {
+                configFile: 'tsconfig.react.json',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    mode: 'production',
   },
-  mode: 'production', // Minify the output for production use
-}
+
+  // Main library configurations
+  {
+    entry: './src/index.ts',
+    output: {
+      filename: 'index.umd.js',
+      path: path.resolve(__dirname, 'dist'),
+      library: 'WindBarb',
+      libraryTarget: 'umd',
+    },
+    resolve: {
+      extensions: ['.ts', '.js'],
+    },
+    module: {
+      rules: [
+        {
+          test: /\.ts$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
+      ],
+    },
+    mode: 'production',
+  },
+  {
+    entry: './src/index.ts',
+    output: {
+      filename: 'index.esm.js',
+      path: path.resolve(__dirname, 'dist'),
+      libraryTarget: 'module',
+    },
+    experiments: {
+      outputModule: true,
+    },
+    resolve: {
+      extensions: ['.ts', '.js'],
+    },
+    module: {
+      rules: [
+        {
+          test: /\.ts$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
+      ],
+    },
+    mode: 'production',
+  },
+  {
+    entry: './src/index.ts',
+    output: {
+      filename: 'index.cjs.js',
+      path: path.resolve(__dirname, 'dist'),
+      libraryTarget: 'commonjs2',
+    },
+    resolve: {
+      extensions: ['.ts', '.js'],
+    },
+    module: {
+      rules: [
+        {
+          test: /\.ts$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
+      ],
+    },
+    mode: 'production',
+  },
+]
