@@ -1,0 +1,48 @@
+{
+  "name": "wind-barbs",
+  "version": "1.0.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wojonet/wind-barbs"
+  },
+  "description": "A small utility to generate wind barb SVGs",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./react": "./dist/react/index.js"
+  },
+  "keywords": [
+    "wind",
+    "barbs",
+    "svg",
+    "react",
+    "weather"
+  ],
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "npm run build:umd && npm run build:react",
+    "build:umd": "webpack --config webpack.config.js",
+    "build:react": "webpack --config webpack.react.config.js",
+    "clean": "rimraf ./dist"
+  },
+  "author": "Alec Wojciechowski",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.2",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "rimraf": "^6.0.1"
+  },
+  "peerDependencies": {
+    "react": ">=0.14.27",
+    "@types/react": ">=0.14.27"
+  },
+  "optionalPeerDependencies": {
+    "react": ">=0.14.27",
+    "@types/react": ">=0.14.27"
+  }
+}
