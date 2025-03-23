@@ -14,7 +14,7 @@ const defaultOptions = {
  * @returns {SVGSVGElement} The SVG element representing the wind barb
  */
 const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = defaultOptions): SVGSVGElement => {
-  const finalOptions = { ...defaultOptions, ...options }
+  const opts = { ...defaultOptions, ...options }
 
   const svgNS = 'http://www.w3.org/2000/svg'
   const svg = document.createElementNS(svgNS, 'svg')
@@ -27,7 +27,7 @@ const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = def
     circle.setAttribute('cx', '9')
     circle.setAttribute('cy', '12.5')
     circle.setAttribute('r', '5')
-    circle.setAttribute('stroke', options.color)
+    circle.setAttribute('stroke', opts.color)
     circle.setAttribute('stroke-width', '2')
     circle.setAttribute('fill', 'none')
     svg.appendChild(circle)
@@ -51,7 +51,7 @@ const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = def
     const stem = document.createElementNS(svgNS, 'polyline')
     stem.setAttribute('points', '9,25 9,2.9')
     stem.setAttribute('fill', 'none')
-    stem.setAttribute('stroke', options.color)
+    stem.setAttribute('stroke', opts.color)
     stem.setAttribute('stroke-width', '2')
     svg.appendChild(stem)
     svg.appendChild(stem)
@@ -60,7 +60,7 @@ const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = def
     const stem = document.createElementNS(svgNS, 'polyline')
     stem.setAttribute('points', '9,25 9,3.9 17.7,0.95')
     stem.setAttribute('fill', 'none')
-    stem.setAttribute('stroke', options.color)
+    stem.setAttribute('stroke', opts.color)
     stem.setAttribute('stroke-width', '2')
     svg.appendChild(stem)
     remainingSpeed -= 10
@@ -70,8 +70,8 @@ const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = def
   // Add 50 knots flags
   while (remainingSpeed >= 50) {
     const flag = document.createElementNS(svgNS, 'path')
-    flag.setAttribute('fill', options.color)
-    flag.setAttribute('stroke', options.color)
+    flag.setAttribute('fill', opts.color)
+    flag.setAttribute('stroke', opts.color)
     flag.setAttribute('stroke-width', '2')
     flag.setAttribute(
       'd',
@@ -98,7 +98,7 @@ const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = def
     flag.setAttribute('y1', currentY.toString())
     flag.setAttribute('x2', '17.7')
     flag.setAttribute('y2', (currentY - 2.9).toString())
-    flag.setAttribute('stroke', options.color)
+    flag.setAttribute('stroke', opts.color)
     flag.setAttribute('stroke-width', '2')
     svg.appendChild(flag)
     remainingSpeed -= 10
@@ -112,7 +112,7 @@ const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = def
     flag.setAttribute('y1', currentY.toString())
     flag.setAttribute('x2', '13.35')
     flag.setAttribute('y2', (currentY - 1.45).toString())
-    flag.setAttribute('stroke', options.color)
+    flag.setAttribute('stroke', opts.color)
     flag.setAttribute('stroke-width', '2')
     svg.appendChild(flag)
     remainingSpeed -= 5

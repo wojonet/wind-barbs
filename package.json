@@ -12,12 +12,14 @@
     ".": {
       "require": "./dist/index.cjs",
       "import": "./dist/index.esm.js",
-      "default": "./dist/index.umd.js"
+      "default": "./dist/index.umd.js",
+      "types": "./dist/index.d.ts"
     },
     "./react": {
       "require": "./dist/react/index.cjs",
       "import": "./dist/react/index.esm.js",
-      "default": "./dist/react/index.umd.js"
+      "default": "./dist/react/index.umd.js",
+      "types": "./dist/react/index.d.ts"
     }
   },
   "keywords": [
