@@ -26,7 +26,7 @@ export default [
             {
               loader: 'ts-loader',
               options: {
-                configFile: 'tsconfig.react.json',
+                configFile: 'tsconfig.json',
               },
             },
           ],
@@ -60,7 +60,7 @@ export default [
             {
               loader: 'ts-loader',
               options: {
-                configFile: 'tsconfig.react.json',
+                configFile: 'tsconfig.json',
               },
             },
           ],
@@ -91,7 +91,7 @@ export default [
             {
               loader: 'ts-loader',
               options: {
-                configFile: 'tsconfig.react.json',
+                configFile: 'tsconfig.json',
               },
             },
           ],
