@@ -20,15 +20,25 @@ const generateWindBarbSvg = (
   windDirection: number,
   options: WindBarbSvgOptions = defaultOptions,
 ): React.JSX.Element => {
-  const finalOptions = { ...defaultOptions, ...options }
+  const opts = { ...defaultOptions, ...options }
+  const svgNS = 'http://www.w3.org/2000/svg'
 
-  if (windSpeed === 0) {
-    // Light and calm winds: render a circle
-    return (
-      <svg viewBox="0 0 18 25" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="9" cy="12.5" r="5" stroke={finalOptions.color} strokeWidth="2" fill="none" />
-      </svg>
-    )
+  const svg = document.createElementNS(svgNS, 'svg')
+  svg.setAttribute('viewBox', '0 0 18 25')
+  svg.setAttribute('xmlns', svgNS)
+  svg.style.transform = `rotate(${windDirection}deg)`
+  svg.style.transformOrigin = 'bottom center'
+
+  if (windSpeed < 3) {
+    const circle = document.createElementNS(svgNS, 'circle')
+    circle.setAttribute('cx', '9')
+    circle.setAttribute('cy', '12.5')
+    circle.setAttribute('r', '5')
+    circle.setAttribute('stroke', opts.color)
+    circle.setAttribute('stroke-width', '2')
+    circle.setAttribute('fill', 'none')
+    svg.appendChild(circle)
+    return <>{svg.outerHTML}</>
   }
 
   let currentY = 2.9
@@ -36,71 +46,53 @@ const generateWindBarbSvg = (
     currentY = 6.85
   }
 
-  const flags: React.JSX.Element[] = []
+  const stem = document.createElementNS(svgNS, 'polyline')
+  stem.setAttribute('points', '9,25 9,2.9')
+  stem.setAttribute('fill', 'none')
+  stem.setAttribute('stroke', opts.color)
+  stem.setAttribute('stroke-width', '2')
+  svg.appendChild(stem)
+
   let remainingSpeed = windSpeed
 
-  // Add 50 knots flags
   while (remainingSpeed >= 50) {
-    flags.push(
-      <path
-        key={`flag-50-${currentY}`}
-        fill={finalOptions.color}
-        stroke={finalOptions.color}
-        strokeWidth="2"
-        d={`M9,${currentY} L15,${currentY + 2} L9,${currentY + 4} Z`}
-      />,
-    )
+    const flag = document.createElementNS(svgNS, 'path')
+    flag.setAttribute('fill', opts.color)
+    flag.setAttribute('stroke', opts.color)
+    flag.setAttribute('stroke-width', '2')
+    flag.setAttribute('d', `M9,${currentY} L15,${currentY + 2} L9,${currentY + 4} Z`)
+    svg.appendChild(flag)
     remainingSpeed -= 50
     currentY += remainingSpeed >= 50 ? 5.5 : 7
   }
 
-  // Add 10 knots flags
-  while (remainingSpeed >= 10 && currentY !== 2.9) {
-    flags.push(
-      <line
-        key={`flag-10-${currentY}`}
-        x1="9"
-        y1={currentY.toString()}
-        x2="17.7"
-        y2={(currentY - 2.9).toString()}
-        stroke={finalOptions.color}
-        strokeWidth="2"
-      />,
-    )
+  while (remainingSpeed >= 10) {
+    const flag = document.createElementNS(svgNS, 'line')
+    flag.setAttribute('x1', '9')
+    flag.setAttribute('y1', currentY.toString())
+    flag.setAttribute('x2', '17.7')
+    flag.setAttribute('y2', (currentY - 2.9).toString())
+    flag.setAttribute('stroke', opts.color)
+    flag.setAttribute('stroke-width', '2')
+    svg.appendChild(flag)
     remainingSpeed -= 10
-    currentY = currentY === 2.9 ? 6.85 : currentY + 3
+    currentY += 3
   }
 
-  // Add 5 knots flags
   while (remainingSpeed >= 5) {
-    flags.push(
-      <line
-        key={`flag-5-${currentY}`}
-        x1="9"
-        y1={currentY.toString()}
-        x2="13.35"
-        y2={(currentY - 1.45).toString()}
-        stroke={finalOptions.color}
-        strokeWidth="2"
-      />,
-    )
+    const flag = document.createElementNS(svgNS, 'line')
+    flag.setAttribute('x1', '9')
+    flag.setAttribute('y1', currentY.toString())
+    flag.setAttribute('x2', '13.35')
+    flag.setAttribute('y2', (currentY - 1.45).toString())
+    flag.setAttribute('stroke', opts.color)
+    flag.setAttribute('stroke-width', '2')
+    svg.appendChild(flag)
     remainingSpeed -= 5
     currentY += 3
   }
 
-  return (
-    <svg
-      viewBox="0 0 18 25"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{
-        transform: `rotate(${windDirection}deg)`,
-        transformOrigin: 'bottom center',
-      }}
-    >
-      <polyline points="9,25 9,2.9" fill="none" stroke={finalOptions.color} strokeWidth="2" />
-      {flags}
-    </svg>
-  )
+  return <>{svg.outerHTML}</>
 }
 
 export { generateWindBarbSvg }
