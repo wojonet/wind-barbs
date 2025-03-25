@@ -13,6 +13,7 @@ Redistributables are in `umd` format. There are no dependencies.
 - [Usage](#usage)
   - [In-browser DOM Element](#in-browser-dom-element)
   - [React/JSX style](#reactjsx-style)
+  - [Non-`exports` Environments](#non-exports-environments)
 - [WIP](#wip)
 - [License](#license)
 
@@ -76,12 +77,22 @@ The second way to use `wind-barbs` will produce a JSX element. Import from `wind
 import { generateWindBarbSvg } from 'wind-barbs/react'
 
 const MyComponent = () => {
-  const svg = generateWindBarbSvg(15, -90)
+  const svg = generateWindBarbSvg(15, -90, { color: 'pink' })
   return <div>{svg}</div>
 }
 ```
 
 This will produce the same SVG as shown previously.
+
+### Non-`exports` environments
+
+If your environment does not support `exports` in `package.json`, then you can use the bundled library, which contains the DOM and JSX-style functions. The type signature for this is:
+
+```typescript
+import { generateWindBarbSvg } from '../index'
+import { generateWindBarbSvg as generateWindBarbSvgReact } from '../react/index'
+export { generateWindBarbSvg, generateWindBarbSvgReact }
+```
 
 ## WIP
 

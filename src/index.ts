@@ -20,6 +20,11 @@ const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = def
   const svg = document.createElementNS(svgNS, 'svg')
   svg.setAttribute('viewBox', '0 0 18 25')
   svg.setAttribute('xmlns', svgNS)
+  // Rotate the SVG to match the wind direction
+  svg.style.transform = `rotate(${windDirection}deg)`
+  svg.style.transformOrigin = 'bottom center'
+  // make height 100%
+  svg.setAttribute('height', '100%')
 
   if (windSpeed < 3) {
     // Add a circle for light and calm winds
@@ -38,10 +43,6 @@ const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = def
   if (windSpeed >= 3 && windSpeed < 8) {
     currentY = 6.85
   }
-
-  // Rotate the SVG to match the wind direction
-  svg.style.transform = `rotate(${windDirection}deg)`
-  svg.style.transformOrigin = 'bottom center'
 
   // Add flags based on wind speed
   let remainingSpeed = windSpeed

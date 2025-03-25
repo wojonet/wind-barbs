@@ -2,26 +2,38 @@
 <html lang="en">
   <head>
     <title>React Wind Barb Test</title>
-    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="../dist/react/index.umd.js" type="text/javascript"></script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="text/babel">
-      const { generateWindBarbSvg } = window.WindBarb;
+    
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.2.0",
+          "react-dom/": "https://esm.sh/react-dom@18.2.0/"
+        }
+      }
+    </script>
+    <script type="module">
+      import React from "https://esm.sh/react@18.2.0";
+      import ReactDOM from "https://esm.sh/react-dom@18.2.0/";
+      import * as WindBarbReact from "../dist/react/index.js";
 
       const WindBarbTest = () => {
         const windBarbs = [];
         for (let i = 0; i < 150; i += 5) {
-          const svg = generateWindBarbSvg(i, 0);
-          windBarbs.push(svg);
+          const svg = WindBarbReact.generateWindBarbSvg(i, 0, { color: 'pink'});
+          windBarbs.push(
+            React.createElement('div', { key: i, style: { border: '1px solid black' } },
+              svg,
+              React.createElement('div', { style: { textAlign: 'center' } }, `${i} knots`)
+            )
+          );
         }
-        return <div style={{ display: 'flex', flexWrap: 'wrap' }}>{windBarbs}</div>;
+        return React.createElement('div', { style: { display: 'flex', height: '500px'} }, windBarbs);
       };
 
-      ReactDOM.render(<WindBarbTest />, document.getElementById('root'));
+      ReactDOM.render(React.createElement(WindBarbTest), document.getElementById('root'));
     </script>
   </body>
 </html>

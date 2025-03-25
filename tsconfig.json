@@ -13,6 +13,7 @@
   },
   "include": [
     "src/index.ts",
+    "src/bundle/index.ts",
     "src/react/**/*.tsx" // Include React files
   ],
   "exclude": ["node_modules", "dist"]
