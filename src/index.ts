@@ -17,6 +17,7 @@ const defaultOptions = {
  */
 const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = defaultOptions): SVGSVGElement => {
   const opts = { ...defaultOptions, ...options }
+  const roundedWindSpeed = Math.round(windSpeed / 5) * 5
 
   const svgNS = 'http://www.w3.org/2000/svg'
   const svg = document.createElementNS(svgNS, 'svg')
@@ -28,7 +29,7 @@ const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = def
   // make height 100%
   svg.setAttribute('height', '100%')
 
-  if (windSpeed < 3) {
+  if (roundedWindSpeed < 3) {
     // Add a circle for light and calm winds
     const circle = document.createElementNS(svgNS, 'circle')
     circle.setAttribute('cx', '9')
@@ -42,15 +43,12 @@ const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = def
   }
 
   let currentY = 2.9
-  if (windSpeed >= 3 && windSpeed < 8) {
-    currentY = 6.85
-  }
 
   // Add flags based on wind speed
-  let remainingSpeed = windSpeed
+  let remainingSpeed = roundedWindSpeed
 
   // Create the stem
-  if (windSpeed >= 50 || windSpeed < 7) {
+  if (roundedWindSpeed >= 50 || roundedWindSpeed < 8) {
     const stem = document.createElementNS(svgNS, 'polyline')
     stem.setAttribute('points', '9,25 9,2.9')
     stem.setAttribute('fill', 'none')
@@ -68,6 +66,19 @@ const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = def
     svg.appendChild(stem)
     remainingSpeed -= 10
     currentY = 6.85
+  }
+
+  if (roundedWindSpeed >= 3 && roundedWindSpeed < 8) {
+    currentY = 6.85
+    const flag = document.createElementNS(svgNS, 'line')
+    flag.setAttribute('x1', '9')
+    flag.setAttribute('y1', currentY.toString())
+    flag.setAttribute('x2', '13.35')
+    flag.setAttribute('y2', (currentY - 1.45).toString())
+    flag.setAttribute('stroke', opts.color)
+    flag.setAttribute('stroke-width', '2')
+    svg.appendChild(flag)
+    return svg
   }
 
   // Add 50 knots flags
@@ -123,10 +134,6 @@ const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = def
   }
 
   return svg
-}
-
-interface Window {
-  generateWindBarbSvg: typeof generateWindBarbSvg
 }
 
 export { generateWindBarbSvg }

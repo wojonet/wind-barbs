@@ -25,8 +25,9 @@ const generateWindBarbSvg = (
   options: WindBarbSvgOptions = defaultOptions,
 ): React.JSX.Element => {
   const opts = { ...defaultOptions, ...options }
+  const roundedWindSpeed = Math.round(windSpeed / 5) * 5
 
-  if (windSpeed < 3) {
+  if (roundedWindSpeed < 3) {
     return (
       <svg
         viewBox="0 0 18 25"
@@ -44,19 +45,41 @@ const generateWindBarbSvg = (
 
   const flags = []
   let currentY = 2.9
-  let remainingSpeed = windSpeed
-
-  if (windSpeed >= 3 && windSpeed < 8) {
-    currentY = 6.85
-  }
+  let remainingSpeed = roundedWindSpeed
 
   // implement polyline for stem
-  if (windSpeed >= 50 || windSpeed < 7) {
+  if (roundedWindSpeed >= 50 || roundedWindSpeed < 8) {
     flags.push(<polyline key="stem" points="9,25 9,2.9" fill="none" stroke={opts.color} strokeWidth="2" />)
   } else {
     flags.push(<polyline key="stem" points="9,25 9,3.9 17.7,0.95" fill="none" stroke={opts.color} strokeWidth="2" />)
     remainingSpeed -= 10
     currentY = 6.85
+  }
+
+  if (roundedWindSpeed >= 3 && roundedWindSpeed < 8) {
+    currentY = 6.85
+    return (
+      <svg
+        viewBox="0 0 18 25"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{
+          transform: `rotate(${windDirection}deg)`,
+          transformOrigin: opts.rotationPoint === 'stem' ? 'bottom center' : 'center center',
+          height: '100%',
+        }}
+      >
+        {flags}
+        <line
+          key={`flag-5-${currentY}`}
+          x1="9"
+          y1={currentY}
+          x2="13.35"
+          y2={currentY - 1.45}
+          stroke={opts.color}
+          strokeWidth="2"
+        />
+      </svg>
+    )
   }
 
   while (remainingSpeed >= 50) {

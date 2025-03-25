@@ -1,6 +1,6 @@
 {
   "name": "wind-barbs",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "type": "module",
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "npm run clean && npm run compile && npm run webpack",
+    "build": "npm run compile && npm run webpack",
     "webpack": "webpack",
     "compile": "tsc",
     "test": "serve ./",

@@ -21,7 +21,7 @@
 
       const WindBarbTest = () => {
         const windBarbs = [];
-        for (let i = 0; i < 150; i += 5) {
+        for (let i = 0; i < 150; i += 1) {
           const svg = WindBarbReact.generateWindBarbSvg(i, 15, { color: 'pink', rotationPoint: 'center'});
           windBarbs.push(
             React.createElement('div', { key: i, style: { border: '1px solid black' } },
