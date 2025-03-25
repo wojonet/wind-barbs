@@ -1,9 +1,11 @@
 export interface WindBarbSvgOptions {
   color?: string
+  rotationPoint?: 'stem' | 'center'
 }
 
 const defaultOptions = {
   color: '#000000',
+  rotationPoint: 'stem',
 }
 
 /**
@@ -22,7 +24,7 @@ const generateWindBarbSvg = (windSpeed: number, windDirection = 0, options = def
   svg.setAttribute('xmlns', svgNS)
   // Rotate the SVG to match the wind direction
   svg.style.transform = `rotate(${windDirection}deg)`
-  svg.style.transformOrigin = 'bottom center'
+  svg.style.transformOrigin = opts.rotationPoint === 'stem' ? 'bottom center' : 'center center'
   // make height 100%
   svg.setAttribute('height', '100%')
 

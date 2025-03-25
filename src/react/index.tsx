@@ -1,11 +1,15 @@
 import React from 'react'
 
+type RotationPoint = 'stem' | 'center'
+
 interface WindBarbSvgOptions {
   color?: string
+  rotationPoint?: RotationPoint
 }
 
 const defaultOptions = {
   color: '#000000',
+  rotationPoint: 'stem' as RotationPoint,
 }
 
 /**
@@ -29,7 +33,7 @@ const generateWindBarbSvg = (
         xmlns="http://www.w3.org/2000/svg"
         style={{
           transform: `rotate(${windDirection}deg)`,
-          transformOrigin: 'bottom center',
+          transformOrigin: opts.rotationPoint === 'stem' ? 'bottom center' : 'center center',
           height: '100%',
         }}
       >
@@ -107,7 +111,7 @@ const generateWindBarbSvg = (
       xmlns="http://www.w3.org/2000/svg"
       style={{
         transform: `rotate(${windDirection}deg)`,
-        transformOrigin: 'bottom center',
+        transformOrigin: opts.rotationPoint === 'stem' ? 'bottom center' : 'center center',
         height: '100%',
       }}
     >

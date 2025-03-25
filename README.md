@@ -98,8 +98,6 @@ export { generateWindBarbSvg, generateWindBarbSvgReact }
 
 This is a work in progress and may be updated in the future.
 
-- [ ] Add other module definitions
-- [ ] Allow rotations on other points
 - [ ] Allow SVG to be justified to the left, removing blank space.
 
 ## License
