@@ -33,7 +33,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "npm run compile && npm run webpack",
+    "build": "webpack",
     "webpack": "webpack",
     "compile": "tsc",
     "test": "serve ./",
