@@ -10,19 +10,19 @@
       {
         "imports": {
           "react": "https://esm.sh/react@18.2.0",
-          "react-dom/": "https://esm.sh/react-dom@18.2.0/"
+          "react-dom": "https://esm.sh/react-dom@18.2.0/"
         }
       }
     </script>
     <script type="module">
-      import React from "https://esm.sh/react@18.2.0";
-      import ReactDOM from "https://esm.sh/react-dom@18.2.0/";
-      import * as WindBarbReact from "../dist/react/index.js";
+      import React from "react";
+      import ReactDOM from "react-dom";
+      import WindBarbReact from "../dist/react/index.esm.js";
 
       const WindBarbTest = () => {
         const windBarbs = [];
         for (let i = 0; i < 150; i += 1) {
-          const svg = WindBarbReact.generateWindBarbSvg(i, 15, { color: 'pink', rotationPoint: 'center'});
+          const svg = WindBarbReact(i, 15, { color: 'pink', rotationPoint: 'center'});
           windBarbs.push(
             React.createElement('div', { key: i, style: { border: '1px solid black' } },
               svg,

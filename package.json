@@ -51,10 +51,12 @@
   },
   "peerDependencies": {
     "@types/react": ">=0.14.27",
-    "react": ">=0.14.27"
+    "react": ">=0.14.27",
+    "react-native-svg": ">=15.1.0"
   },
   "optionalPeerDependencies": {
+    "@types/react": ">=0.14.27",
     "react": ">=0.14.27",
-    "@types/react": ">=0.14.27"
+    "react-native-svg": ">=15.1.0"
   }
 }

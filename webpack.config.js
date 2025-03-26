@@ -12,7 +12,7 @@ export default [
       libraryTarget: 'umd',
     },
     resolve: {
-      extensions: ['.tsx', '.jsx'],
+      extensions: ['.tsx', '.jsx', '.ts', '.js'],
     },
     externals: {
       react: 'react',
@@ -46,7 +46,7 @@ export default [
       outputModule: true,
     },
     resolve: {
-      extensions: ['.tsx', '.jsx'],
+      extensions: ['.tsx', '.jsx', '.ts', '.js'],
     },
     externals: {
       react: 'react',
@@ -77,7 +77,7 @@ export default [
       libraryTarget: 'commonjs2',
     },
     resolve: {
-      extensions: ['.tsx', '.jsx'],
+      extensions: ['.tsx', '.jsx', '.ts', '.js'],
     },
     externals: {
       react: 'react',
@@ -103,7 +103,7 @@ export default [
 
   // Main library configurations
   {
-    entry: './src/index.ts',
+    entry: './src/global/index.ts',
     output: {
       filename: 'index.umd.js',
       path: path.resolve(__dirname, 'dist'),
@@ -125,7 +125,7 @@ export default [
     mode: 'production',
   },
   {
-    entry: './src/index.ts',
+    entry: './src/global/index.ts',
     output: {
       filename: 'index.esm.js',
       path: path.resolve(__dirname, 'dist'),
@@ -149,7 +149,7 @@ export default [
     mode: 'production',
   },
   {
-    entry: './src/index.ts',
+    entry: './src/global/index.ts',
     output: {
       filename: 'index.cjs.js',
       path: path.resolve(__dirname, 'dist'),

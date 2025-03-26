@@ -12,7 +12,7 @@
     "jsx": "react" // Add JSX support for React
   },
   "include": [
-    "src/index.ts",
+    "src/generator.ts",
     "src/bundle/index.ts",
     "src/react/**/*.tsx" // Include React files
   ],
