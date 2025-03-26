@@ -34,6 +34,7 @@
   ],
   "scripts": {
     "build": "webpack",
+    "build:rn": "tsc --project tsconfig.react-native.json",
     "webpack": "webpack",
     "compile": "tsc",
     "test": "serve ./",
@@ -42,6 +43,10 @@
   "author": "Alec Wojciechowski",
   "license": "MIT",
   "devDependencies": {
+    "@tsconfig/react-native": "^3.0.5",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^19.0.12",
+    "@types/react-test-renderer": "^19.0.0",
     "rimraf": "^6.0.1",
     "serve": "^14.2.4",
     "ts-loader": "^9.5.2",

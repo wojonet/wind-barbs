@@ -9,7 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "rootDir": "./src",
-    "jsx": "react-native"
+    "jsx": "react"
   },
   "include": ["src/**/*.ts", "src/react/*.tsx"],
   "exclude": ["node_modules", "dist"]

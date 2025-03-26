@@ -35,21 +35,22 @@ export default [
     },
     mode: 'production',
   },
+  // React native configurations
   {
-    entry: './src/react/index.tsx',
+    entry: './src/react-native/index.tsx',
     output: {
-      path: path.resolve(__dirname, 'dist/react'),
-      filename: 'index.esm.js',
-      libraryTarget: 'module',
-    },
-    experiments: {
-      outputModule: true,
+      filename: 'index.umd.js',
+      path: path.resolve(__dirname, 'dist/react-native'),
+      library: 'WindBarbReactNative',
+      libraryTarget: 'umd',
     },
     resolve: {
       extensions: ['.tsx', '.jsx', '.ts', '.js'],
     },
     externals: {
+      'react-native': 'react-native',
       react: 'react',
+      'react-native-svg': 'react-native-svg',
     },
     module: {
       rules: [
@@ -60,7 +61,7 @@ export default [
             {
               loader: 'ts-loader',
               options: {
-                configFile: 'tsconfig.json',
+                configFile: 'tsconfig.react-native.json',
               },
             },
           ],
@@ -69,91 +70,14 @@ export default [
     },
     mode: 'production',
   },
-  {
-    entry: './src/react/index.tsx',
-    output: {
-      path: path.resolve(__dirname, 'dist/react'),
-      filename: 'index.cjs.js',
-      libraryTarget: 'commonjs2',
-    },
-    resolve: {
-      extensions: ['.tsx', '.jsx', '.ts', '.js'],
-    },
-    externals: {
-      react: 'react',
-    },
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: 'ts-loader',
-              options: {
-                configFile: 'tsconfig.json',
-              },
-            },
-          ],
-        },
-      ],
-    },
-    mode: 'production',
-  },
-
-  // Main library configurations
+  // Global library configurations
   {
     entry: './src/global/index.ts',
     output: {
       filename: 'index.umd.js',
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'dist/global'),
       library: 'WindBarb',
       libraryTarget: 'umd',
-    },
-    resolve: {
-      extensions: ['.ts', '.js'],
-    },
-    module: {
-      rules: [
-        {
-          test: /\.ts$/,
-          use: 'ts-loader',
-          exclude: /node_modules/,
-        },
-      ],
-    },
-    mode: 'production',
-  },
-  {
-    entry: './src/global/index.ts',
-    output: {
-      filename: 'index.esm.js',
-      path: path.resolve(__dirname, 'dist'),
-      libraryTarget: 'module',
-    },
-    experiments: {
-      outputModule: true,
-    },
-    resolve: {
-      extensions: ['.ts', '.js'],
-    },
-    module: {
-      rules: [
-        {
-          test: /\.ts$/,
-          use: 'ts-loader',
-          exclude: /node_modules/,
-        },
-      ],
-    },
-    mode: 'production',
-  },
-  {
-    entry: './src/global/index.ts',
-    output: {
-      filename: 'index.cjs.js',
-      path: path.resolve(__dirname, 'dist'),
-      libraryTarget: 'commonjs2',
     },
     resolve: {
       extensions: ['.ts', '.js'],
