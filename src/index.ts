@@ -193,3 +193,5 @@ const generateWindBarbSvgAst = (
 }
 
 export { generateWindBarbSvgAst }
+
+export * from './types'

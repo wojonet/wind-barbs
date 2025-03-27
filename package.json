@@ -1,6 +1,6 @@
 {
   "name": "wind-barbs",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "type": "module",
   "repository": {
     "type": "git",
@@ -10,6 +10,7 @@
   "main": "./dist/index.umd.js",
   "module": "./dist/index.esm.js",
   "types": "./dist/index.d.ts",
+  "react-native": "./src/index.ts",
   "exports": {
     "./browser": {
       "import": "./dist/global/index.esm.js",
