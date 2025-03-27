@@ -1,6 +1,6 @@
 {
   "name": "wind-barbs",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "type": "module",
   "repository": {
     "type": "git",
@@ -11,18 +11,6 @@
   "module": "./dist/index.esm.js",
   "types": "./dist/index.d.ts",
   "react-native": "./src/index.ts",
-  "exports": {
-    "./browser": {
-      "import": "./dist/global/index.esm.js",
-      "default": "./dist/global/index.umd.js",
-      "types": "./dist/global/index.d.ts"
-    },
-    "./react": {
-      "import": "./dist/react/index.esm.js",
-      "default": "./dist/react/index.umd.js",
-      "types": "./dist/react/index.d.ts"
-    }
-  },
   "keywords": [
     "wind",
     "barbs",
@@ -31,6 +19,7 @@
     "weather"
   ],
   "files": [
+    "src/index.ts",
     "dist/"
   ],
   "scripts": {

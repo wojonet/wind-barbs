@@ -1,6 +1,6 @@
 import React from 'react'
 import { WindBarbSvgOptions, SvgNode } from '../index'
-import { generateWindBarbSvgAst } from '../index'
+import generateWindBarbSvgAst from '../index'
 
 const getSvgJsx = (svgElement: SvgNode): React.JSX.Element => {
   switch (svgElement.type) {
