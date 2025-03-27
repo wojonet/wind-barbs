@@ -1,4 +1,4 @@
-import { WindBarbSvgOptions, SvgNode } from '../types'
+import { WindBarbSvgOptions, SvgNode } from '../index'
 import { generateWindBarbSvgAst } from '../index'
 
 const propsToAttributes = {
