@@ -2,13 +2,19 @@ import path from 'path'
 const __dirname = import.meta.dirname
 
 export default [
-  // React configurations
+  // umd configurations
   {
-    entry: './src/react/index.tsx',
+    entry: {
+      './src/react/index.umd.js': './src/react/index.tsx',
+      './src/global/index.umd.js': './src/global/index.ts',
+      './src/index.umd.js': './src/index.ts',
+    },
     output: {
-      path: path.resolve(__dirname, 'dist/react'),
-      filename: 'index.umd.js',
-      library: 'WindBarbReact',
+      path: path.resolve(__dirname, 'dist'),
+      filename: pathData => {
+        return pathData.chunk.name.replace('./src/', '')
+      },
+      library: 'WindBarb',
       libraryTarget: 'umd',
     },
     resolve: {
@@ -35,22 +41,30 @@ export default [
     },
     mode: 'production',
   },
-  // React native configurations
+  // esm configurations
   {
-    entry: './src/react-native/index.tsx',
+    entry: {
+      './src/react/index.esm.js': './src/react/index.tsx',
+      './src/global/index.esm.js': './src/global/index.ts',
+      './src/index.esm.js': './src/index.ts',
+    },
     output: {
-      filename: 'index.umd.js',
-      path: path.resolve(__dirname, 'dist/react-native'),
-      library: 'WindBarbReactNative',
-      libraryTarget: 'umd',
+      path: path.resolve(__dirname, 'dist'),
+      filename: pathData => {
+        return pathData.chunk.name.replace('./src/', '')
+      },
+      library: {
+        type: 'module',
+      },
     },
     resolve: {
       extensions: ['.tsx', '.jsx', '.ts', '.js'],
     },
+    experiments: {
+      outputModule: true,
+    },
     externals: {
-      'react-native': 'react-native',
       react: 'react',
-      'react-native-svg': 'react-native-svg',
     },
     module: {
       rules: [
@@ -61,33 +75,10 @@ export default [
             {
               loader: 'ts-loader',
               options: {
-                configFile: 'tsconfig.react-native.json',
+                configFile: 'tsconfig.json',
               },
             },
           ],
-        },
-      ],
-    },
-    mode: 'production',
-  },
-  // Global library configurations
-  {
-    entry: './src/global/index.ts',
-    output: {
-      filename: 'index.umd.js',
-      path: path.resolve(__dirname, 'dist/global'),
-      library: 'WindBarb',
-      libraryTarget: 'umd',
-    },
-    resolve: {
-      extensions: ['.ts', '.js'],
-    },
-    module: {
-      rules: [
-        {
-          test: /\.ts$/,
-          use: 'ts-loader',
-          exclude: /node_modules/,
         },
       ],
     },

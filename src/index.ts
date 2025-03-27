@@ -49,7 +49,7 @@ const SHORT_BARB_SPEED = 5
  * @param {WindBarbSvgOptions?} options - Options for customizing the SVG
  * @returns {SvgElement} The SVG element representing the wind barb
  */
-const generateWindBarbSvg = (
+const generateWindBarbSvgAst = (
   windSpeed: number,
   windDirection: number = 0,
   options?: WindBarbSvgOptions,
@@ -192,4 +192,4 @@ const generateWindBarbSvg = (
   return svgPath
 }
 
-export { generateWindBarbSvg }
+export { generateWindBarbSvgAst }

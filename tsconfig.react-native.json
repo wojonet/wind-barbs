@@ -1,9 +1,0 @@
-{
-  "extends": "@tsconfig/react-native/tsconfig.json",
-  "compilerOptions": {
-    "declaration": true,
-    "noEmit": false
-  },
-  "include": ["src/react-native/**/*.ts", "src/react-native/**/*.tsx"],
-  "exclude": ["node_modules", "dist"]
-}

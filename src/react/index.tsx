@@ -1,6 +1,6 @@
 import React from 'react'
 import { WindBarbSvgOptions, SvgNode } from '../types'
-import { generateWindBarbSvg } from '../generator'
+import { generateWindBarbSvgAst } from '../index'
 
 const getSvgJsx = (svgElement: SvgNode): React.JSX.Element => {
   switch (svgElement.type) {
@@ -16,7 +16,7 @@ const getSvgJsx = (svgElement: SvgNode): React.JSX.Element => {
 }
 
 const generateSvg = (windSpeed: number, windDirection: number = 0, options?: WindBarbSvgOptions) => {
-  const svgNodes = generateWindBarbSvg(windSpeed, windDirection, options)
+  const svgNodes = generateWindBarbSvgAst(windSpeed, windDirection, options)
   const svgElements = svgNodes.children.map(getSvgJsx)
   return <svg {...svgNodes.attr}>{svgElements}</svg>
 }
