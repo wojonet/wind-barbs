@@ -2,168 +2,83 @@ import path from 'path'
 const __dirname = import.meta.dirname
 
 export default [
-  // React configurations
+  // umd configurations
   {
-    entry: './src/react/index.tsx',
+    entry: {
+      './src/react/index.umd.js': './src/react/index.tsx',
+      './src/global/index.umd.js': './src/global/index.ts',
+      './src/index.umd.js': './src/index.ts',
+    },
     output: {
-      path: path.resolve(__dirname, 'dist/react'),
-      filename: 'index.umd.js',
-      library: 'WindBarbReact',
-      libraryTarget: 'umd',
-    },
-    resolve: {
-      extensions: ['.tsx', '.jsx'],
-    },
-    externals: {
-      react: 'react',
-    },
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: 'ts-loader',
-              options: {
-                configFile: 'tsconfig.json',
-              },
-            },
-          ],
-        },
-      ],
-    },
-    mode: 'production',
-  },
-  {
-    entry: './src/react/index.tsx',
-    output: {
-      path: path.resolve(__dirname, 'dist/react'),
-      filename: 'index.esm.js',
-      libraryTarget: 'module',
-    },
-    experiments: {
-      outputModule: true,
-    },
-    resolve: {
-      extensions: ['.tsx', '.jsx'],
-    },
-    externals: {
-      react: 'react',
-    },
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: 'ts-loader',
-              options: {
-                configFile: 'tsconfig.json',
-              },
-            },
-          ],
-        },
-      ],
-    },
-    mode: 'production',
-  },
-  {
-    entry: './src/react/index.tsx',
-    output: {
-      path: path.resolve(__dirname, 'dist/react'),
-      filename: 'index.cjs.js',
-      libraryTarget: 'commonjs2',
-    },
-    resolve: {
-      extensions: ['.tsx', '.jsx'],
-    },
-    externals: {
-      react: 'react',
-    },
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: 'ts-loader',
-              options: {
-                configFile: 'tsconfig.json',
-              },
-            },
-          ],
-        },
-      ],
-    },
-    mode: 'production',
-  },
-
-  // Main library configurations
-  {
-    entry: './src/index.ts',
-    output: {
-      filename: 'index.umd.js',
       path: path.resolve(__dirname, 'dist'),
+      filename: pathData => {
+        return pathData.chunk.name.replace('./src/', '')
+      },
       library: 'WindBarb',
       libraryTarget: 'umd',
     },
     resolve: {
-      extensions: ['.ts', '.js'],
+      extensions: ['.tsx', '.jsx', '.ts', '.js'],
+    },
+    externals: {
+      react: 'react',
     },
     module: {
       rules: [
         {
-          test: /\.ts$/,
-          use: 'ts-loader',
+          test: /\.tsx?$/,
           exclude: /node_modules/,
+          use: [
+            {
+              loader: 'ts-loader',
+              options: {
+                configFile: 'tsconfig.json',
+              },
+            },
+          ],
         },
       ],
     },
     mode: 'production',
   },
+  // esm configurations
   {
-    entry: './src/index.ts',
+    entry: {
+      './src/react/index.esm.js': './src/react/index.tsx',
+      './src/global/index.esm.js': './src/global/index.ts',
+      './src/index.esm.js': './src/index.ts',
+    },
     output: {
-      filename: 'index.esm.js',
       path: path.resolve(__dirname, 'dist'),
-      libraryTarget: 'module',
+      filename: pathData => {
+        return pathData.chunk.name.replace('./src/', '')
+      },
+      library: {
+        type: 'module',
+      },
+    },
+    resolve: {
+      extensions: ['.tsx', '.jsx', '.ts', '.js'],
     },
     experiments: {
       outputModule: true,
     },
-    resolve: {
-      extensions: ['.ts', '.js'],
+    externals: {
+      react: 'react',
     },
     module: {
       rules: [
         {
-          test: /\.ts$/,
-          use: 'ts-loader',
+          test: /\.tsx?$/,
           exclude: /node_modules/,
-        },
-      ],
-    },
-    mode: 'production',
-  },
-  {
-    entry: './src/index.ts',
-    output: {
-      filename: 'index.cjs.js',
-      path: path.resolve(__dirname, 'dist'),
-      libraryTarget: 'commonjs2',
-    },
-    resolve: {
-      extensions: ['.ts', '.js'],
-    },
-    module: {
-      rules: [
-        {
-          test: /\.ts$/,
-          use: 'ts-loader',
-          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'ts-loader',
+              options: {
+                configFile: 'tsconfig.json',
+              },
+            },
+          ],
         },
       ],
     },

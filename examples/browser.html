@@ -4,7 +4,7 @@
   </head>
 
   <body>
-    <script src="../dist/index.umd.js" type="text/javascript"></script>
+    <script src="../dist/global/index.umd.js" type="text/javascript"></script>
     <script>
       document.onreadystatechange = () => {
         if (document.readyState === 'complete') {
@@ -12,8 +12,7 @@
 
           for (var i = 0; i < 150; i += 1) {
             var containerDiv = document.createElement('div')
-            //containerDiv.style.height = '500px'
-            var svg = WindBarb.generateWindBarbSvg(i, 0)
+            var svg = WindBarb.default(i, 0)
             svg.style.border = '1px solid black'
             containerDiv.appendChild(svg)
 

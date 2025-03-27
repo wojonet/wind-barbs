@@ -1,22 +1,22 @@
 {
   "name": "wind-barbs",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/wojonet/wind-barbs"
   },
   "description": "A small utility to generate wind barb SVGs",
-  "main": "./dist/bundle/index.js",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "require": "./dist/index.cjs.js",
-      "import": "./dist/index.esm.js",
-      "default": "./dist/index.umd.js",
-      "types": "./dist/index.d.ts"
+    "./browser": {
+      "import": "./dist/global/index.esm.js",
+      "default": "./dist/global/index.umd.js",
+      "types": "./dist/global/index.d.ts"
     },
     "./react": {
-      "require": "./dist/react/index.cjs.js",
       "import": "./dist/react/index.esm.js",
       "default": "./dist/react/index.umd.js",
       "types": "./dist/react/index.d.ts"
@@ -33,8 +33,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "npm run compile && npm run webpack",
-    "webpack": "webpack",
+    "build": "webpack",
     "compile": "tsc",
     "test": "serve ./",
     "clean": "rimraf ./dist"
@@ -54,7 +53,7 @@
     "react": ">=0.14.27"
   },
   "optionalPeerDependencies": {
-    "react": ">=0.14.27",
-    "@types/react": ">=0.14.27"
+    "@types/react": ">=0.14.27",
+    "react": ">=0.14.27"
   }
 }

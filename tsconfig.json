@@ -9,12 +9,8 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "rootDir": "./src",
-    "jsx": "react" // Add JSX support for React
+    "jsx": "react"
   },
-  "include": [
-    "src/index.ts",
-    "src/bundle/index.ts",
-    "src/react/**/*.tsx" // Include React files
-  ],
+  "include": ["src/**/*.ts", "src/react/*.tsx"],
   "exclude": ["node_modules", "dist"]
 }
